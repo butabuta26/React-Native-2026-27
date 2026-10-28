@@ -32,7 +32,9 @@ export default function Form({onAddCard}) {
                         placeholder="Enter Your Name" 
                         placeholderTextColor="#999999"
                     />
-                    <View style={styles.error}>{errors.name}</View>
+                    <View style={styles.error}>
+                        <Text>{errors.name}</Text>
+                    </View>
 
                     <TextInput style={styles.input} 
                         value={values.email} 
@@ -40,7 +42,9 @@ export default function Form({onAddCard}) {
                         placeholder="Enter Your Email" 
                         placeholderTextColor="#999999"
                     />
-                    <View style={styles.error}>{errors.email}</View>
+                    <View style={styles.error}>
+                        <Text>{errors.email}</Text>
+                    </View>
 
                     <TextInput style={styles.input} 
                         value={values.age} 
@@ -48,7 +52,9 @@ export default function Form({onAddCard}) {
                         placeholder="Enter Your Age" 
                         placeholderTextColor="#999999"
                     />
-                    <View style={styles.error}>{errors.age}</View>
+                    <View style={styles.error}> 
+                        <Text>{errors.age}</Text>
+                    </View>
 
                     <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                         <Text style={styles.buttonText} >Submit</Text>
