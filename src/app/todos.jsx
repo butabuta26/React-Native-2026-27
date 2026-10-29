@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { useCallback } from 'react';
+import { useFocusEffect } from 'expo-router';
 
 const fetchTodos = async () => {
   const response = await fetch(
@@ -14,10 +16,18 @@ const fetchTodos = async () => {
 };
 
 export default function Todos() {
-  const { data, isPending, error } = useQuery({
+  const {data, isPending, error, refetch, isRefetching,
+  } = useQuery({
     queryKey: ['todos'],
     queryFn: fetchTodos,
+    staleTime: 1000 * 60,
+    gcTime: 1000 * 60 * 5,
   });
+
+  useFocusEffect( useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
 
   if (isPending) {
     return <Text>Loading...</Text>;
@@ -42,6 +52,8 @@ export default function Todos() {
           </Text>
         </View>
       )}
+      refreshing={isRefetching}
+      onRefresh={refetch}
     />
   );
 }
